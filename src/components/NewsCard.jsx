@@ -2,15 +2,38 @@ import PropTypes from "prop-types";
 
 const NewsCard = ({ article }) => {
   return (
-    <div className="p-4 bg-white shadow-lg rounded-lg flex flex-col md:flex-row">
+    <div
+      className="p-4 bg-white shadow-lg rounded-lg flex flex-col md:flex-row"
+      style={{ width: "34vw" }}
+    >
       <img
         src={article.image}
         alt={article.title}
         className="w-full h-48 object-cover rounded-lg md:w-48 md:h-32 md:mr-4"
       />
       <div className="flex flex-col justify-between">
-        <h3 className="text-xl font-semibold">{article.title}</h3>
-        <p className="text-sm text-gray-600 mt-2">{article.description}</p>
+        <h3
+          className="text-xl font-semibold overflow-hidden text-ellipsis max-h-12"
+          style={{
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            lineHeight: "1.25rem",
+          }}
+        >
+          {article.title}
+        </h3>
+        <p
+          className="text-sm text-gray-600 mt-2 overflow-hidden text-ellipsis max-h-20 leading-tight"
+          style={{
+            display: "-webkit-box",
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: "vertical",
+            lineHeight: "1.25rem",
+          }}
+        >
+          {article.description}
+        </p>
       </div>
     </div>
   );

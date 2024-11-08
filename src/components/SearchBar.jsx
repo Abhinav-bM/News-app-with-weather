@@ -23,7 +23,7 @@ const SearchBar = ({ onSearch }) => {
       type="text"
       placeholder="Search news..."
       onChange={handleChange}
-      className="border p-2 w-full"
+      className="border p-2 my-2 w-full"
     />
   );
 };
