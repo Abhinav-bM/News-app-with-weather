@@ -17,7 +17,11 @@ const NewsCard = ({ article }) => {
 };
 
 NewsCard.propTypes = {
-  article: PropTypes.node.isRequired,
+  article: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    image: PropTypes.string,
+  }).isRequired,
 };
 
 export default NewsCard;
