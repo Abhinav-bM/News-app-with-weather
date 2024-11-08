@@ -2,8 +2,8 @@
 const Footer = () => {
   return (
     
-    <footer className=" p-4 bg-gray-800 text-white text-center">
-        &copy; 2023 News Application
+    <footer className=" p-4  text-black text-center border-t border-b border-grey">
+        &copy; 2024 News24
     </footer>
   )
 }

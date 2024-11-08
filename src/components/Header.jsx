@@ -1,45 +1,69 @@
 import { useDispatch, useSelector } from "react-redux";
 import { toggleWeatherModal, setLanguage } from "../redux/slices/newsSlice";
+import { useState } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
 
 const Header = () => {
   const dispatch = useDispatch();
   const weather = useSelector((state) => state.news.weather);
   const language = useSelector((state) => state.news.language);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLanguageChange = (e) => {
     const selectedLanguage = e.target.value;
     dispatch(setLanguage(selectedLanguage));
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <header className=" px-48 py-4 bg-blue-500 text-white flex justify-between items-center">
-      <div className="flex items-center space-x-2">
-        <label htmlFor="language-select" className="text-white">
-          Language:
-        </label>
-        <select
-          id="language-select"
-          value={language}
-          onChange={handleLanguageChange}
-          className="bg-white text-black p-1 rounded"
-        >
-          <option value="en">English</option>
-          <option value="hi">Hindi</option>
-        </select>
+    <header className="py-4 text-white flex justify-between items-center mx-6 md:mx-12 lg:mx-48 border-t border-b border-grey">
+      {/* LOGO */}
+      <h1 className="text-2xl md:text-4xl text-black font-bold">News24</h1>
+
+      {/* ICON FOR MOBILE MENU */}
+      <div className="md:hidden">
+        <button onClick={toggleMenu} aria-label="Toggle menu" className=" text-black">
+          {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+        </button>
       </div>
 
-      <h1 className="text-4xl font-bold">News Application</h1>
-
-      {weather && (
-        <div
-          className="flex items-center space-x-4 cursor-pointer"
-          onClick={() => dispatch(toggleWeatherModal())}
-        >
-          <span>
-            {weather.name}: {weather.main.temp}°C, {weather.weather[0].main}
-          </span>
+      {/* MENU CONTENT */}
+      <div
+        className={`${
+          isMenuOpen ? "block" : "hidden"
+        } absolute top-16 right-4 p-2 rounded-md md:static md:flex md:items-center md:space-x-6 border border-grey`}
+      >
+        {/* LANGUAGE SELECTOR */}
+        <div className="flex items-center mb-4 md:mb-0 ">
+          <label htmlFor="language-select" className="text-white hidden md:block">
+            
+          </label>
+          <select
+            id="language-select"
+            value={language}
+            onChange={handleLanguageChange}
+            className="bg-white text-black p-1 rounded border border-grey"
+          >
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+          </select>
         </div>
-      )}
+
+        {/* WEATHER */}
+        {weather && (
+          <div
+            className="flex items-center space-x-4 cursor-pointer"
+            onClick={() => dispatch(toggleWeatherModal())}
+          >
+            <span className="text-black">
+              {weather.name} - {weather.main.temp}°C - {weather.weather[0].main}
+            </span>
+          </div>
+        )}
+      </div>
     </header>
   );
 };

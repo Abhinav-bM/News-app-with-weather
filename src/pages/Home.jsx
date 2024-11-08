@@ -7,11 +7,11 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import NewsCard from "../components/NewsCard";
 import DefaultLayout from "../layouts/DefaultLayout";
 import WeatherModal from "../components/WeatherModal";
-// import articles from "../../articles.json"
+import articles from "../../articles.json"
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { articles, language, region, loading } = useSelector(
+  const {  language, region, loading } = useSelector(
     (state) => state.news
   ); 
   const [searchTerm, setSearchTerm] = useState("");
@@ -52,16 +52,16 @@ const Home = () => {
 
   return (
     <DefaultLayout>
-      <h2 className="text-3xl font-bold mb-4">Recent News</h2>
+      {/* <h2 className="text-3xl font-bold mb-4">Recent News</h2> */}
       <SearchBar onSearch={setSearchTerm} />
-      <div className=" flex flex-wrap justify-between">
+      <div className=" grid grid-cols-1 md:grid-cols-2 gap-5 justify-between">
         {loading ? (
           <LoadingSpinner />
         ) : (
           articles.map((article, index) => (
-            <div key={index} className="p-4 bg-white shadow-lg rounded-lg">
+            // <div key={index} className="p-2 mb-4 bg-white shadow-lg rounded-lg">
               <NewsCard key={index} article={article} />
-            </div>
+            // </div>
           ))
         )}
       </div>
