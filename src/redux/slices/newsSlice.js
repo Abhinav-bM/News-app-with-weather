@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const initialState = {
-  articles: JSON.parse(localStorage.getItem("articles")) || [],
+  articles: [],
   weather: JSON.parse(localStorage.getItem("weather")) || null,
   loading: false,
   error: null,
@@ -18,7 +18,7 @@ const newsSlice = createSlice({
       state.articles = action.payload;
     },
     setWeather: (state, action) => {
-      localStorage.setItem("weather", JSON.stringify(action.payload))
+      localStorage.setItem("weather", JSON.stringify(action.payload));
       state.weather = action.payload;
     },
     setLoading: (state, action) => {
@@ -49,6 +49,5 @@ export const {
   toggleWeatherModal,
   setRegion,
 } = newsSlice.actions;
-
 
 export default newsSlice.reducer;
