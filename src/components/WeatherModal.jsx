@@ -13,7 +13,7 @@ const WeatherModal = () => {
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-      <div className="flex flex-col bg-white rounded p-4 w-full max-w-xs">
+      <div className="flex flex-col bg-white rounded p-4 w-3/4 sm:w-full max-w-xs">
         <div className="font-bold text-xl text-center">{weather.name}</div>
         <div className="text-sm text-gray-500 text-center">{currentDate}</div>
         <div className="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-24 w-24">
