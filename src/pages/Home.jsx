@@ -5,7 +5,7 @@ import {
   setLoading,
   setWeather,
   setRegion,
-  setError
+  setError,
 } from "../redux/slices/newsSlice";
 import {
   fetchNewsBySearch,
@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { articles, language, region, loading } = useSelector(
+  const { articles, language, region, loading, error } = useSelector(
     (state) => state.news
   );
   const [searchTerm, setSearchTerm] = useState("");
@@ -68,9 +68,18 @@ const Home = () => {
       <div className=" grid grid-cols-1 md:grid-cols-2 gap-5 justify-between">
         {loading ? (
           <LoadingSpinner />
+        ) : error ? (
+          // DISPLAYING ERROR MESSAGE
+          <p className="mt-2">No news found! Please try again later.</p>
         ) : (
           articles.map((article, index) => (
-            <Link to={`/news/${index}`} key={index} onClick={() => localStorage.setItem("selectedArticle", JSON.stringify(article))}>
+            <Link
+              to={`/news/${index}`}
+              key={index}
+              onClick={() =>
+                localStorage.setItem("selectedArticle", JSON.stringify(article))
+              }
+            >
               <NewsCard key={index} article={article} />
             </Link>
           ))
