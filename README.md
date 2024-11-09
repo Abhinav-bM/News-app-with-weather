@@ -31,7 +31,7 @@ This project is a responsive News and Weather application built using React with
 
 ## Tech Stack
 
-**Client:** React, Redux, TailwindCSS, React Spinners, Flowbite
+**Client:** React, Redux, TailwindCSS, React Spinners, Flowbite,, react-toastify
 
 
 

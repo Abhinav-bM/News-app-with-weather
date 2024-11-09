@@ -40,7 +40,6 @@ export const fetchWeather =  async (lat, lon) => {
   } catch (error) {
     console.error("Error fetching top headlines:", error);
     throw error;
-    // dispatch(setError("Failed to fetch weather data"));
   }
 };
 

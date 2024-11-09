@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from 'react-toastify';
 
 const initialState = {
   articles: JSON.parse(localStorage.getItem("articles")) || [],
@@ -14,9 +15,7 @@ const newsSlice = createSlice({
   initialState,
   reducers: {
     setNews: (state, action) => {
-      localStorage.setItem("articles", JSON.stringify(action.payload))
       state.articles = action.payload;
-
     },
     setWeather: (state, action) => {
       localStorage.setItem("weather", JSON.stringify(action.payload))
@@ -27,6 +26,7 @@ const newsSlice = createSlice({
     },
     setError: (state, action) => {
       state.error = action.payload;
+      toast.error(action.payload);
     },
     setLanguage: (state, action) => {
       state.language = action.payload;

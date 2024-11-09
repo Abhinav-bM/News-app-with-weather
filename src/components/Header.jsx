@@ -4,12 +4,17 @@ import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 
 const Header = () => {
+  // USE DISPATCH HOOK TO DISPATCH ACTIONS TO THE REDUX STORE
   const dispatch = useDispatch();
+
+  // SELECTING WEATHER AND LANGUAGE STATE FROM REDUX STORE
   const weather = useSelector((state) => state.news.weather);
   const language = useSelector((state) => state.news.language);
+
+  // STATE TO MANAGE MOBILE MENU OPEN/CLOSE
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-
+  // HANDLER FUNCTION TO UPDATE LANGUAGE IN REDUX STORE
   const handleLanguageChange = (e) => {
     const selectedLanguage = e.target.value;
     dispatch(setLanguage(selectedLanguage));

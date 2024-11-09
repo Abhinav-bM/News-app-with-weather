@@ -5,6 +5,7 @@ import {
   setLoading,
   setWeather,
   setRegion,
+  setError
 } from "../redux/slices/newsSlice";
 import {
   fetchNewsBySearch,
@@ -17,21 +18,23 @@ import NewsCard from "../components/NewsCard";
 import DefaultLayout from "../layouts/DefaultLayout";
 import WeatherModal from "../components/WeatherModal";
 import { Link } from "react-router-dom";
-// import articles from "../../articles.json";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { articles, language, region, loading } = useSelector((state) => state.news);
+  const { articles, language, region, loading } = useSelector(
+    (state) => state.news
+  );
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     if (navigator.geolocation) {
+      // FETCHING USER'S GEOLOCATION TO GET WEATHER BASED ON THEIR LOCATION
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
         fetchWeather(latitude, longitude)
           .then((response) => {
-            dispatch(setWeather(response));
-            dispatch(setRegion(response.sys.country.toLowerCase()));
+            dispatch(setWeather(response)); // SETTING WEATHER DATA TO THE STORE
+            dispatch(setRegion(response.sys.country.toLowerCase())); // SETTING REGION DATA TO THE STORE
           })
           .catch((err) => {
             console.error("Error fetching weather :", err);
@@ -41,20 +44,21 @@ const Home = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(setLoading(true));
+    dispatch(setLoading(true)); // SETTING LOADING STATE TO TRUE
     const fetchNews = searchTerm
-      ? fetchNewsBySearch(searchTerm, language, region)
-      : fetchTopHeadlines(language, region);
+      ? fetchNewsBySearch(searchTerm, language, region) // FETCHING NEWS BY SEARCH TERM
+      : fetchTopHeadlines(language, region); // FETCHING TOP HEADLINES IF NO SEARCH TERM
 
     fetchNews
       .then((articles) => {
-        dispatch(setNews(articles));
+        dispatch(setNews(articles)); // SETTING NEWS ARTICLES TO THE STORE
       })
       .catch((error) => {
         console.error("Error fetching news:", error);
+        dispatch(setError("Failed to fetch news articles. Please try again."));
       })
       .finally(() => {
-        dispatch(setLoading(false));
+        dispatch(setLoading(false)); // SETTING LOADING STATE TO FALSE AFTER FETCHING NEWS
       });
   }, [searchTerm, language, region, dispatch]);
 
@@ -66,7 +70,7 @@ const Home = () => {
           <LoadingSpinner />
         ) : (
           articles.map((article, index) => (
-            <Link to={`/news/${index}`} key={index}>
+            <Link to={`/news/${index}`} key={index} onClick={() => localStorage.setItem("selectedArticle", JSON.stringify(article))}>
               <NewsCard key={index} article={article} />
             </Link>
           ))

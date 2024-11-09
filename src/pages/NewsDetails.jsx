@@ -1,22 +1,33 @@
 import DefaultLayout from "../layouts/DefaultLayout";
-import { useParams, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import WeatherModal from "../components/WeatherModal";
+import { useState, useEffect } from "react";
 
 function NewsDetails() {
-  const { id } = useParams();
-  const article = useSelector((state) => state.news.articles[id]);
+  const [article, setArticle] = useState(null);
+
+  useEffect(() => {
+    const storedArticle = JSON.parse(localStorage.getItem("selectedArticle"));
+    if (storedArticle) setArticle(storedArticle);
+
+    return () => {
+      localStorage.removeItem("selectedArticle");
+    };
+  }, []);
 
   if (!article) {
     return <p>Article not found.</p>;
   }
+
   return (
     <DefaultLayout>
       <div className="container">
         <Link to="/" className="text-blue-500 mb-4 inline-block">
           ← Back to Home
         </Link>
-        <h1 className=" text-2xl md:text-4xl font-bold mb-4">{article.title}</h1>
+        <h1 className=" text-2xl md:text-4xl font-bold mb-4">
+          {article.title}
+        </h1>
 
         <p className="text-gray-500 mb-4 text-sm">{article.description}</p>
         <p className="text-gray-500 mb-4">
@@ -42,7 +53,6 @@ function NewsDetails() {
                       <a
                         href={article.url}
                         target="_blank"
-                        rel="noopener noreferrer"
                         className="text-blue-500"
                       >
                         Read full article

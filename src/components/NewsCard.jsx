@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 const NewsCard = ({ article }) => {
   return (
     <div className="p-4 gap-5 bg-white shadow-lg rounded-lg flex flex-col sm:flex-row md:flex-row w-full md:w-full lg:w-full">
+      {/* IMAGE CONTAINER */}
       <div className="w-full sm:w-1/2 md:w-48 h-48 md:h-32 flex-shrink-0 rounded-lg overflow-hidden">
         <img
           src={article.image}
@@ -10,7 +11,9 @@ const NewsCard = ({ article }) => {
           className="w-full h-full"
         />
       </div>
+      {/* TEXT CONTENT CONTAINER */}
       <div className="flex flex-col justify-between">
+        {/* ARTICLE TITLE */}
         <h3
           className="text-xl font-semibold overflow-hidden text-ellipsis max-h-12"
           style={{
@@ -22,6 +25,8 @@ const NewsCard = ({ article }) => {
         >
           {article.title}
         </h3>
+
+        {/* ARTICLE DESCRIPTION */}
         <p
           className="text-sm text-gray-600 mt-2 overflow-hidden text-ellipsis max-h-20 leading-tight"
           style={{

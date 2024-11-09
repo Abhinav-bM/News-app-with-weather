@@ -6,6 +6,7 @@ const DefaultLayout = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      {/* MAIN CONTENT AREA WHERE CHILDREN WILL BE RENDERED */}
       <main className="px-8 sm:px-10 md:px-10 lg:px-20 xl:px-48 2xl:px-48 flex-grow p-4">
         {children}
       </main>
