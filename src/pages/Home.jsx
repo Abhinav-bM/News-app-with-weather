@@ -16,11 +16,12 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import NewsCard from "../components/NewsCard";
 import DefaultLayout from "../layouts/DefaultLayout";
 import WeatherModal from "../components/WeatherModal";
-import articles from "../../articles.json";
+import { Link } from "react-router-dom";
+// import articles from "../../articles.json";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { language, region, loading } = useSelector((state) => state.news);
+  const { articles, language, region, loading } = useSelector((state) => state.news);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -65,7 +66,9 @@ const Home = () => {
           <LoadingSpinner />
         ) : (
           articles.map((article, index) => (
-            <NewsCard key={index} article={article} />
+            <Link to={`/news/${index}`} key={index}>
+              <NewsCard key={index} article={article} />
+            </Link>
           ))
         )}
       </div>

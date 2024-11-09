@@ -8,6 +8,7 @@ const Header = () => {
   const weather = useSelector((state) => state.news.weather);
   const language = useSelector((state) => state.news.language);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
 
   const handleLanguageChange = (e) => {
     const selectedLanguage = e.target.value;
@@ -19,7 +20,8 @@ const Header = () => {
   };
 
   return (
-    <header className="py-4 text-white flex justify-between items-center mx-6 md:mx-12 lg:mx-20 xl:mx-48 border-t border-b border-grey">
+    <>
+      <header className="py-4 text-white flex justify-between items-center mx-6 md:mx-12 lg:mx-20 xl:mx-48 border-t border-b border-grey">
       {/* LOGO */}
       <h1 className="text-2xl md:text-4xl text-black font-bold">News24</h1>
 
@@ -65,6 +67,8 @@ const Header = () => {
         )}
       </div>
     </header>
+    </>
+  
   );
 };
 
