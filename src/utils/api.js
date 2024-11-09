@@ -36,6 +36,7 @@ export const fetchWeather =  async (lat, lon) => {
         import.meta.env.VITE_OPENWEATHERMAP_API_KEY
       }&units=metric`
     );
+    console.log(response.data)
     return response.data
   } catch (error) {
     console.error("Error fetching top headlines:", error);

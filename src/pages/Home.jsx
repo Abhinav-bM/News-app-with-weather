@@ -1,19 +1,26 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setNews, setLoading, setWeather, setRegion } from "../redux/slices/newsSlice";
-import { fetchNewsBySearch, fetchTopHeadlines, fetchWeather } from "../utils/api";
+import {
+  setNews,
+  setLoading,
+  setWeather,
+  setRegion,
+} from "../redux/slices/newsSlice";
+import {
+  fetchNewsBySearch,
+  fetchTopHeadlines,
+  fetchWeather,
+} from "../utils/api";
 import SearchBar from "../components/SearchBar";
 import LoadingSpinner from "../components/LoadingSpinner";
 import NewsCard from "../components/NewsCard";
 import DefaultLayout from "../layouts/DefaultLayout";
 import WeatherModal from "../components/WeatherModal";
-import articles from "../../articles.json"
+import articles from "../../articles.json";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const {  language, region, loading } = useSelector(
-    (state) => state.news
-  ); 
+  const { language, region, loading } = useSelector((state) => state.news);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -21,13 +28,13 @@ const Home = () => {
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
         fetchWeather(latitude, longitude)
-        .then((response)=>{
-          dispatch(setWeather(response))
-          dispatch(setRegion(response.sys.country))
-        })
-        .catch((err)=>{
-          console.error("Error fetching weather :", err)
-        })
+          .then((response) => {
+            dispatch(setWeather(response));
+            dispatch(setRegion(response.sys.country));
+          })
+          .catch((err) => {
+            console.error("Error fetching weather :", err);
+          });
       });
     }
   }, [dispatch]);
@@ -52,16 +59,13 @@ const Home = () => {
 
   return (
     <DefaultLayout>
-      {/* <h2 className="text-3xl font-bold mb-4">Recent News</h2> */}
       <SearchBar onSearch={setSearchTerm} />
       <div className=" grid grid-cols-1 md:grid-cols-2 gap-5 justify-between">
         {loading ? (
           <LoadingSpinner />
         ) : (
           articles.map((article, index) => (
-            // <div key={index} className="p-2 mb-4 bg-white shadow-lg rounded-lg">
-              <NewsCard key={index} article={article} />
-            // </div>
+            <NewsCard key={index} article={article} />
           ))
         )}
       </div>
