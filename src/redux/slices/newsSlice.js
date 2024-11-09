@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  articles: [],
-  weather: null,
+  articles: JSON.parse(localStorage.getItem("articles")) || [],
+  weather: JSON.parse(localStorage.getItem("weather")) || null,
   loading: false,
   error: null,
   region: "in",
@@ -14,9 +14,12 @@ const newsSlice = createSlice({
   initialState,
   reducers: {
     setNews: (state, action) => {
+      localStorage.setItem("articles", JSON.stringify(action.payload))
       state.articles = action.payload;
+
     },
     setWeather: (state, action) => {
+      localStorage.setItem("weather", JSON.stringify(action.payload))
       state.weather = action.payload;
     },
     setLoading: (state, action) => {

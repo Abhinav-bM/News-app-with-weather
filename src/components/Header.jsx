@@ -35,7 +35,7 @@ const Header = () => {
       {/* MENU CONTENT */}
       <div
         className={`${
-          isMenuOpen ? "block" : "hidden"
+          isMenuOpen ? "block bg-gray-100" : "hidden"
         } absolute top-16 right-4 p-2 rounded-md md:static md:flex md:items-center md:space-x-6 border border-grey`}
       >
         {/* LANGUAGE SELECTOR */}
