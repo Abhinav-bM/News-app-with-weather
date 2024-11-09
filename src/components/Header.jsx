@@ -21,7 +21,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="py-4 text-white flex justify-between items-center mx-6 md:mx-12 lg:mx-20 xl:mx-48 border-t border-b border-grey">
+      <header className="py-4 text-white flex justify-between items-center mx-6 sm:mx-10 md:mx-12 lg:mx-20 xl:mx-48 border-t border-b border-grey">
       {/* LOGO */}
       <h1 className="text-2xl md:text-4xl text-black font-bold">News24</h1>
 
