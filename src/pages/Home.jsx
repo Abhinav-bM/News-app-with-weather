@@ -31,7 +31,7 @@ const Home = () => {
         fetchWeather(latitude, longitude)
           .then((response) => {
             dispatch(setWeather(response));
-            dispatch(setRegion(response.sys.country));
+            dispatch(setRegion(response.sys.country.toLowerCase()));
           })
           .catch((err) => {
             console.error("Error fetching weather :", err);
