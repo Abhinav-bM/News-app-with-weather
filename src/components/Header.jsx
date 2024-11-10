@@ -40,7 +40,7 @@ const Header = () => {
       {/* MENU CONTENT */}
       <div
         className={`${
-          isMenuOpen ? "block bg-gray-100" : "hidden"
+          isMenuOpen ? "block bg-gray-100 mt-2" : "hidden"
         } absolute top-16 right-4 p-2 rounded-md md:static md:flex md:items-center md:space-x-6 border border-grey`}
       >
         {/* LANGUAGE SELECTOR */}
@@ -62,7 +62,7 @@ const Header = () => {
         {/* WEATHER */}
         {weather && (
           <div
-            className="flex items-center space-x-4 cursor-pointer"
+            className="pl-2 flex items-center space-x-4 cursor-pointer"
             onClick={() => dispatch(toggleWeatherModal())}
           >
             <span className="text-black">
