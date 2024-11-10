@@ -74,7 +74,7 @@ const Home = () => {
         ) : (
           articles.map((article, index) => (
             <Link
-              to={`/news/${index}`}
+              to={`/news`}
               key={index}
               onClick={() =>
                 localStorage.setItem("selectedArticle", JSON.stringify(article))
