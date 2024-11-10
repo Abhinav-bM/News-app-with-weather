@@ -10,9 +10,9 @@ function NewsDetails() {
     const storedArticle = JSON.parse(localStorage.getItem("selectedArticle"));
     if (storedArticle) setArticle(storedArticle);
 
-    return () => {
-      localStorage.removeItem("selectedArticle");
-    };
+    // return () => {
+    //   localStorage.removeItem("selectedArticle");
+    // };
   }, []);
 
   if (!article) {
